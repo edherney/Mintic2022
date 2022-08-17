@@ -1,5 +1,8 @@
+
 hola mundo, de nuevo haciendo cambios
 
 segunda linea de prueba
 
 realizando pruebas de conectividad
+
+texto usando un editor de la consola llamado nano.x
