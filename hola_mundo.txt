@@ -9,3 +9,5 @@ texto usando un editor de la consola llamado nano.x
 
 
 nueva linea de modificacion
+
+linea escrita desde sistema operativo manjaro
