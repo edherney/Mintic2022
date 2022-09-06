@@ -15,7 +15,7 @@ public class RolRestController {
     //Metodo Get -> busqueda por id, en nuestra ruta debemos agregar el id
     @GetMapping("/rol/{id}")
     public Rol findById (@PathVariable long id){
-        Rol rol1 = new Rol(1,"Administrador",true);
+        Rol rol1 = new Rol(id,"Administrador",true);
         return rol1;
     }
 
@@ -32,11 +32,22 @@ public class RolRestController {
 
     //Crear un rol
     @PostMapping("/rol")
-    public Rol createRol(@RequestBody Rol rol ){
-        Rol neoRol = new Rol(rol.setIdRol(rol.setIdRol()), rol.setDescripcionRol(rol.getDescripcionRol()),true);
-        return  neoRol;
-
+    public Rol createRol (@RequestBody Rol rol){
+        Rol nuevoRol = new Rol(rol.getIdRol(),rol.getDescripcionRol(),rol.isEstadoRol());
+        return nuevoRol;
     }
 
+    @PutMapping("/rol/{id}")
+    public Rol updateRol (@PathVariable long id, @RequestBody Rol rol){
+        Rol putRol = findById(id);
+        putRol.setDescripcionRol(rol.getDescripcionRol());
+        putRol.setEstadoRol(rol.isEstadoRol());
+        return putRol;
+    }
+
+    @DeleteMapping("/rol/{id}")
+    public void deleteRol(@PathVariable long id){
+        Rol delRol = findById(id);
+    }
 
 }

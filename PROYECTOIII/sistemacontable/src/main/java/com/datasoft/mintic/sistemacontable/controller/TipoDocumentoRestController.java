@@ -2,10 +2,7 @@ package com.datasoft.mintic.sistemacontable.controller;
 
 import com.datasoft.mintic.sistemacontable.entity.Rol;
 import com.datasoft.mintic.sistemacontable.entity.TipoDocumento;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ public class TipoDocumentoRestController {
 
     @GetMapping("/TipoDocumento/{id}")
     public TipoDocumento findById(@PathVariable long id){
-       TipoDocumento docUno = new TipoDocumento(1,"Cedula Ciudadania","CC",true);
+       TipoDocumento docUno = new TipoDocumento(id,"Cedula Ciudadania","CC",true);
        return docUno;
     }
 
@@ -31,4 +28,23 @@ public class TipoDocumentoRestController {
         return tiposDoc;
     }
 
+    @PostMapping("/TipoDocumento")
+    public TipoDocumento createTipoDocumento(@RequestBody TipoDocumento tipoDocumento ){
+        TipoDocumento docNew = new TipoDocumento(tipoDocumento.getIdTipoDocumento(), tipoDocumento.getDescripcionTipodocumento(), tipoDocumento.getSiglasTipoDocumento(), tipoDocumento.isEstado());
+        return docNew;
+    }
+
+    @PutMapping("/TipoDocumento/{id}")
+    public TipoDocumento updateTipoDocumento(@PathVariable long id,@RequestBody TipoDocumento tipoDocumento){
+        TipoDocumento putTipoDoc = findById(id);
+        putTipoDoc.setDescripcionTipodocumento(tipoDocumento.getDescripcionTipodocumento());
+        putTipoDoc.setSiglasTipoDocumento(tipoDocumento.getSiglasTipoDocumento());
+        putTipoDoc.setEstado(tipoDocumento.isEstado());
+        return putTipoDoc;
+    }
+
+    @DeleteMapping("/TipoDocumento/{id}")
+    public void deleteTipoDocumento(@PathVariable long id){
+        TipoDocumento delTipoDocumento = findById(id);
+    }
 }

@@ -1,10 +1,7 @@
 package com.datasoft.mintic.sistemacontable.controller;
 
 import com.datasoft.mintic.sistemacontable.entity.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +13,7 @@ public class EgresoRestController {
 
     @GetMapping("/Egreso/{id}")
     public Egreso findById(@PathVariable long id){
-        Egreso salidaUno = new Egreso(023, TipoMovimiento.EGRESO, new Usuario(1,new TipoDocumento(001,"Cedula Ciudadania","CC",true),"10752341223","Carlos","perez","popayan",603134567,"cperez@hotmail.com",new Rol(0001,"Operario",true),"1q2w3e4r5t",true),812,new Date(),1200000,"Pago publicidad");
+        Egreso salidaUno = new Egreso(002, TipoMovimiento.EGRESO, new Usuario(1,new TipoDocumento(001,"Cedula Ciudadania","CC",true),"10752341223","Carlos","perez","popayan",603134567,"cperez@hotmail.com",new Rol(0001,"Operario",true),"1q2w3e4r5t",true),id,new Date(),1200000,"Pago publicidad");
         return salidaUno;
     }
 
@@ -30,5 +27,27 @@ public class EgresoRestController {
         return nuevoEgre;
     }
 
+    @PostMapping("/Egreso")
+    public Egreso createEgreso (@RequestBody Egreso egreso){
+        Egreso newEgreso = new Egreso(egreso.getIdMovDinero(), egreso.getTipoMovDinero(),egreso.getUserMovDinero(), egreso.getIdEgreso(),egreso.getFechaEgreso(), egreso.getValorEgreso(), egreso.getConceptoEgreso());
+        return newEgreso;
+    }
+
+    @PutMapping("/Egreso/{id}")
+    public Egreso updateEgreso (@PathVariable long id,@RequestBody Egreso egreso){
+        Egreso putEgreso = findById(id);
+        putEgreso.setIdMovDinero(egreso.getIdMovDinero());
+        putEgreso.setTipoMovDinero(egreso.getTipoMovDinero());
+        putEgreso.setUserMovDinero(egreso.getUserMovDinero());
+        putEgreso.setFechaEgreso(egreso.getFechaEgreso());
+        putEgreso.setValorEgreso(egreso.getValorEgreso());
+        putEgreso.setConceptoEgreso(egreso.getConceptoEgreso());
+        return putEgreso;
+    }
+
+    @DeleteMapping("/Egreso/{id}")
+    public void deleteEgreso(@PathVariable long id){
+        Egreso delEgreso = findById(id);
+    }
 
 }
