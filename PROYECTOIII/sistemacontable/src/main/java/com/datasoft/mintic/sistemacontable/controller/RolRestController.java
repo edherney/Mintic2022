@@ -1,6 +1,8 @@
 package com.datasoft.mintic.sistemacontable.controller;
 
 import com.datasoft.mintic.sistemacontable.entity.Rol;
+import com.datasoft.mintic.sistemacontable.service.IRolService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,11 +14,14 @@ import java.util.List;
 @RequestMapping("/api")
 public class RolRestController {
 
+    @Autowired
+    private IRolService rolService;
+
     //Metodo Get -> busqueda por id, en nuestra ruta debemos agregar el id
     @GetMapping("/rol/{id}")
     public Rol findById (@PathVariable long id){
-        Rol rol1 = new Rol(id,"Administrador",true);
-        return rol1;
+        return rolService.findById(id);
+
     }
 
     //Metodo Get -> Busqueda de todos los objetos de mi clase
