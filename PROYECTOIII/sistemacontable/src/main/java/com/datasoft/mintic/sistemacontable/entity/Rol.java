@@ -1,15 +1,29 @@
 package com.datasoft.mintic.sistemacontable.entity;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "roles")
 public class Rol {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rol", nullable = false)
     private long idRol;
+    @Column(name = "descripcion")
     private String descripcionRol;
+    @Column(name = "estado", nullable = false)
     private boolean estadoRol;
+
+    public Rol() {
+    }
 
     public Rol(long idRol, String descripcionRol, boolean estadoRol) {
         this.idRol = idRol;
         this.descripcionRol = descripcionRol;
         this.estadoRol = estadoRol;
     }
+
 
     public long getIdRol() {
         return idRol;
