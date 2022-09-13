@@ -21,7 +21,6 @@ public class RolRestController {
     @GetMapping("/rol/{id}")
     public Rol findById (@PathVariable long id){
         return rolService.findById(id);
-
     }
 
     //Metodo Get -> Busqueda de todos los objetos de mi clase
@@ -33,20 +32,21 @@ public class RolRestController {
     //Crear un rol
     @PostMapping("/rol")
     public Rol createRol (@RequestBody Rol rol){
+<<<<<<< HEAD
         return rolService.createRol( Rol rol);
+=======
+        return rolService.createRol(rol);
+>>>>>>> origin
     }
 
     @PutMapping("/rol/{id}")
-    public Rol updateRol (@PathVariable long id, @RequestBody Rol rol){
-        Rol putRol = findById(id);
-        putRol.setDescripcionRol(rol.getDescripcionRol());
-        putRol.setEstadoRol(rol.isEstadoRol());
-        return putRol;
+    public Rol updateRol (@PathVariable long id, @RequestBody Rol rol) {
+        return rolService.updateRol(id, rol);
     }
-
     @DeleteMapping("/rol/{id}")
     public void deleteRol(@PathVariable long id){
-        Rol delRol = findById(id);
+
+        rolService.deleteRol(id);
     }
 
 }

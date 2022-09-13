@@ -1,17 +1,39 @@
 package com.datasoft.mintic.sistemacontable.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="usuarios")
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_usuario")
     private long idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_documentos")
     private TipoDocumento tipoDocumento;
+    @Column(name = "nro_identificacion", unique = true, nullable = false)
     private String nroIdentificacion;
+    @Column(name = "nombre_usuario", nullable = false)
     private String nombreUsuario;
+    @Column(name = "apellido_usuario", nullable = false)
     private String apellidoUsuario;
+    @Column(name = "direccion_usuario", nullable = false)
     private String dirUsuario;
+    @Column(name = "telefono_usuario", nullable = false)
     private long telUsuario;
+    @Column(name = "email_usuario", nullable = false)
     private String emailUsuario;
+    @ManyToOne
+    @JoinColumn(name = "id_rol", nullable = false)
     private Rol rolUsuario;
+    @Column(name = "password_usuario")
     private String passUsuario;
+    @Column(name = "estado_usuario")
     private boolean estadoUsuario;
+
+    public Usuario() {
+    }
 
     public Usuario(long idUsuario, TipoDocumento tipoDocumento, String nroIdentificacion, String nombreUsuario, String apellidoUsuario, String dirUsuario, long telUsuario, String emailUsuario, Rol rolUsuario, String passUsuario, boolean estadoUsuario) {
         this.idUsuario = idUsuario;
