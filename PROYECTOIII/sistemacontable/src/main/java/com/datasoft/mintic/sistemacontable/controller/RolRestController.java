@@ -27,19 +27,13 @@ public class RolRestController {
     //Metodo Get -> Busqueda de todos los objetos de mi clase
     @GetMapping("/rol")
     public List<Rol> findAll(){
-        List<Rol> roles = new ArrayList<Rol>();
-        Rol rol1 = new Rol(1,"Administrador",true);
-        roles.add(rol1);
-        Rol rol2 = new Rol(2,"Operador",true);
-        roles.add(rol2);
-        return roles;
+        return rolService.findAll();
     }
 
     //Crear un rol
     @PostMapping("/rol")
     public Rol createRol (@RequestBody Rol rol){
-        Rol nuevoRol = new Rol(rol.getIdRol(),rol.getDescripcionRol(),rol.isEstadoRol());
-        return nuevoRol;
+        return rolService.createRol( Rol rol);
     }
 
     @PutMapping("/rol/{id}")

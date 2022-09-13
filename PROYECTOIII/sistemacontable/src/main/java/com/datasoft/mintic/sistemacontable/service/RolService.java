@@ -3,6 +3,7 @@ package com.datasoft.mintic.sistemacontable.service;
 import com.datasoft.mintic.sistemacontable.entity.Rol;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,12 +17,18 @@ public class RolService implements IRolService{
 
     @Override
     public List<Rol> findAll() {
-        return null;
+        List<Rol> roles = new ArrayList<Rol>();
+        Rol rol1 = new Rol(1,"Administrador",true);
+        roles.add(rol1);
+        Rol rol2 = new Rol(2,"Operador",true);
+        roles.add(rol2);
+        return roles;
     }
 
     @Override
     public Rol createRol(Rol rol) {
-        return null;
+        Rol nuevoRol = new Rol(rol.getIdRol(),rol.getDescripcionRol(),rol.isEstadoRol());
+        return nuevoRol;
     }
 
     @Override
